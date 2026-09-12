@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardust Cookie // Celestial Portfolio Wireframe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body class="relative min-h-screen text-slate-100 flex flex-col justify-between">
+
+    <!-- Background Canvas for Stars & Nebulae -->
+    <canvas id="starfield" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Glowing Background Spheres -->
+    <div class="fixed top-1/4 left-10 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed bottom-1/4 right-10 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/2 right-1/3 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+        
+        <!-- HEADER & NAVIGATION -->
+        <header class="sticky top-0 z-50 glass-panel border-b border-purple-500/20 px-4 md:px-8 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Logo Brand -->
+                <a href="#" onclick="switchPage('overview')" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-500 via-cyan-400 to-pink-400 p-[2px] transition-transform group-hover:scale-105">
+                        <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                            <i class="fa-solid fa-meteor text-cyan-300 text-lg"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-space font-bold text-lg tracking-wider text-gradient-celestial block leading-none">STARDUST</span>
+                        <span class="text-[10px] font-mono text-purple-300 tracking-widest uppercase">Fanmade Archive</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 font-space text-sm tracking-wide">
+                    <button onclick="switchPage('overview')" id="nav-overview" class="nav-link active py-1 text-slate-300 hover:text-cyan-300">
+                        <i class="fa-solid fa-compass text-xs mr-1.5 text-cyan-400"></i>01 // OVERVIEW
+                    </button>
+                    <button onclick="switchPage('character')" id="nav-character" class="nav-link py-1 text-slate-300 hover:text-purple-300">
+                        <i class="fa-solid fa-sparkles text-xs mr-1.5 text-purple-400"></i>02 // CHARACTER
+                    </button>
+                    <button onclick="switchPage('background')" id="nav-background" class="nav-link py-1 text-slate-300 hover:text-pink-300">
+                        <i class="fa-solid fa-book-journal-whills text-xs mr-1.5 text-pink-400"></i>03 // LORE & BACKGROUND
+                    </button>
+                    <button onclick="switchPage('contact')" id="nav-contact" class="nav-link py-1 text-slate-300 hover:text-yellow-200">
+                        <i class="fa-solid fa-satellite-dish text-xs mr-1.5 text-yellow-300"></i>04 // TRANSMISSION
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-purple-300 hover:text-white text-xl p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Dropdown Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-purple-500/20 flex flex-col gap-3 font-space text-sm">
+                <button onclick="switchPage('overview')" class="text-left px-3 py-2 rounded-lg hover:bg-purple-900/30 text-cyan-300">01 // OVERVIEW</button>
+                <button onclick="switchPage('character')" class="text-left px-3 py-2 rounded-lg hover:bg-purple-900/30 text-purple-300">02 // CHARACTER</button>
+                <button onclick="switchPage('background')" class="text-left px-3 py-2 rounded-lg hover:bg-purple-900/30 text-pink-300">03 // LORE & BACKGROUND</button>
+                <button onclick="switchPage('contact')" class="text-left px-3 py-2 rounded-lg hover:bg-purple-900/30 text-yellow-200">04 // TRANSMISSION</button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA SWITCHER -->
+        <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 flex-grow w-full">
+
+            <!-- PAGE 1: OVERVIEW -->
+            <section id="page-overview" class="page-view active-view space-y-12">
+                
+                <!-- Hero Wireframe Banner -->
+                <div class="glass-panel rounded-3xl p-6 md:p-10 relative overflow-hidden flex flex-col lg:flex-row items-center gap-10 border-l-4 border-l-cyan-400">
+                    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <!-- Avatar / Photo Container -->
+                    <div class="relative group flex-shrink-0">
+                        <div class="w-48 h-48 md:w-60 md:h-60 rounded-2xl p-1 bg-gradient-to-br from-cyan-300 via-purple-400 to-pink-400 glow-cyan animate-float relative z-10 overflow-hidden">
+                            <img src="image/suami.jpg" 
+                                 alt="Astraia Avatar" 
+                                 class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://placehold.co/600x600/1e1b4b/c084fc?text=Cosmic+Avatar'">
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 z-20 bg-slate-900/90 border border-purple-400/50 px-3 py-1 rounded-full text-xs font-mono text-purple-300 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> ONLINE IN ORBIT
+                        </div>
+                    </div>
+
+                    <!-- Title & Brief Overview -->
+                    <div class="space-y-4 text-center lg:text-left flex-grow">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-400/30 text-xs font-mono text-pink-300">
+                            <i class="fa-solid fa-atom text-cyan-300"></i> CELESTIAL IMPERFECT ANOMALY
+                        </div>
+                        <h1 class="font-space text-3xl md:text-5xl font-extrabold tracking-tight">
+                            STARDUST <span class="text-gradient-celestial">COOKIE</span>
+                        </h1>
+                        <p class="text-purple-200/80 font-mono text-sm tracking-wide">
+                            &lt; Traveler of The Universe & Fiery Star's Wrath &gt;
+                        </p>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base max-w-2xl">
+                            It is hard to say how long the lonesome speck of Cookie dough had been drifting in the vast emptiness of space before the radiance of nameless stars blessed it with the gift of life. Was it a mere coincidence...? For Stardust Cookie, the warmth of many suns was the heat of the oven, and the distant planets were his only companions in his light-speed journey across galaxies. Beckoned by shapeless, fleeting nebulae, guided by the whispering of the stars, Stardust Cookie headed to the City of Wizards to uncover the secret of his birth. Was he trying to find his long-lost purpose, or, on the contrary, escape his predetermined fate...? With a glint of a stray shooting star, this lonesome voyager crosses someone's sky tonight, seeking a place to call home.
+                        </p>
+                        
+                        <div class="pt-2 flex flex-wrap gap-3 justify-center lg:justify-start">
+                            <button onclick="switchPage('character')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 font-semibold font-space text-sm hover:opacity-90 transition-all shadow-lg shadow-cyan-500/20">
+                                Explore Spec Sheet <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                            <button onclick="switchPage('contact')" class="px-5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-purple-400/30 text-purple-200 font-space text-sm transition-all">
+                                Send Transmission
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Profile Table Section -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-table-cells text-cyan-300 text-xl"></i>
+                        <h2 class="font-space text-2xl font-bold text-gradient-celestial">COOKIE SPECIFICATIONS</h2>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-purple-500/20">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse font-mono text-sm">
+                                <thead>
+                                    <tr class="bg-purple-950/40 border-b border-purple-500/30 text-purple-300 uppercase text-xs tracking-wider">
+                                        <th class="p-4"><i class="fa-solid fa-shield-halved mr-2"></i>Parameter</th>
+                                        <th class="p-4"><i class="fa-solid fa-microchip mr-2"></i>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-purple-500/10 text-slate-300">
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-gradient-celestial">Rarity Tier</td>
+                                        <td class="p-4">
+                                            <span class="text-gradient-celestial">★★★★</span>
+                                            <span class="ml-2 text-xs px-2 py-0.5 rounded bg-purple-500/10 border border-purple-400/30 text-gradient-celestial">Super Epic</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-cyan-300">Type</td>
+                                        <td class="p-4 text-cyan-200">Ambush</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-purple-300">Position</td>
+                                        <td class="p-4 text-purple-200">Middle</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-pink-300">Gender / Pronouns</td>
+                                        <td class="p-4 text-pink-200">Male (He/Him)</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-blue-300">Age</td>
+                                        <td class="p-4 text-blue-200">Immortal Adult</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-900/10 transition-colors">
+                                        <td class="p-4 font-semibold text-emerald-300">Cookie Traits</td>
+                                        <td class="p-4 text-emerald-200">Flying & Mysterious</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Lore/Description Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-2 text-pink-300 font-space font-semibold text-lg">
+                            <i class="fa-solid fa-satellite"></i> Summary Description
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Stardust Cookie is a Cookie born from "imperfect" dough imbued with nameless starlight, an unforeseen byproduct of Moonlight Cookie's flawless, moonlight-infused dough that the Wizards discarded into space. Baked by the light of the stars, he travels across the cosmos in search of his origins and a place to call home.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-2 text-cyan-300 font-space font-semibold text-lg">
+                            <i class="fa-solid fa-compass-drafting"></i> Wrath of The Stars
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Stardust Cookie soars in the sky and marks the enemy with the highest ATK (targets Cookies first) with the Sign of the Stars. Then he will descend to deal area damage to the enemies, amplifying debuffs they receive. Targets will receive additional damage depending on the number of buffs they currently have.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: CHARACTER -->
+            <section id="page-character" class="page-view space-y-10">
+                <div class="border-b border-purple-500/20 pb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-xs font-mono text-cyan-300 mb-2">
+                        <i class="fa-solid fa-dna"></i> ENTITY METRICS
+                    </div>
+                    <h2 class="font-space text-3xl font-extrabold text-gradient-celestial">CHARACTER ATTRIBUTES & HEADCANON</h2>
+                </div>
+
+                <!-- 2-Column Responsive Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left Column: Visual Appearance & Quotes -->
+                    <div class="space-y-6 lg:col-span-1">
+                        <!-- Appearance Card -->
+                        <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-4">
+                            <div class="flex items-center gap-3 text-purple-300 font-space font-bold text-xl">
+                                <i class="fa-solid fa-meteor text-cyan-400"></i> Appearance
+                            </div>
+                            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden relative">
+                                <img src="image/husbu.jpg">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                                <span class="absolute bottom-2 left-3 font-mono text-xs text-cyan-200">Nebula Cloak & Starlight Hair</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Stardust Cookie is a slim Cookie of average height. His dough is a deep obsidian with swirls of navy and he has cerulean eyes with long, white lashes. His translucent hair that resembles a comet's tail is mainly light purple, with dark purple in the middle. He has white bangs and two indigo swirl markings on his forehead. His shoes are white and he wears a flowing blue-black cape with indigo lining, which is cyan and sparkly underneath. Each end of his cape has a white star decoration on it. The bottom of his cape is decorated with a thick dark blue ribbon. His spiky white collar has a gold star in the middle.
+                            </p>
+                        </div>
+
+                        <!-- Quote Card -->
+                        <div class="glass-panel rounded-2xl p-6 bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-l-4 border-l-pink-400 relative">
+                            <i class="fa-solid fa-quote-left text-3xl text-pink-400/30 absolute top-4 right-4"></i>
+                            <h3 class="font-space font-semibold text-pink-300 mb-2">Signature Quote</h3>
+                            <blockquote class="italic text-slate-200 text-sm font-serif">
+                                "Will I, too, find a star to call my own?"
+                            <p class="mt-3 text-right text-xs font-mono text-purple-300">— Stardust, Fiery Star</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Skills, Personality & Background -->
+                    <div class="space-y-6 lg:col-span-2">
+                        
+                        <!-- Skills & Hobbies Grid -->
+                        <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-5">
+                            <div class="flex items-center gap-3 text-cyan-300 font-space font-bold text-xl">
+                                <i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i> Celestial Hobbies
+                            </div>
+                            
+                            <!-- Skill Progress Bars -->
+                            <div class="space-y-4 font-mono text-xs">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-cyan-200"><i class="fa-solid fa-water mr-1"></i> Deep-Space Drifting & Nebula Surfings</span>
+                                        <span class="text-cyan-400">98%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full w-[98%] shadow-sm shadow-cyan-400"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-purple-200"><i class="fa-solid fa-stars mr-1"></i> Charting Forgotten Constellations</span>
+                                        <span class="text-purple-400">92%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-purple-400 to-pink-500 h-2 rounded-full w-[92%] shadow-sm shadow-purple-400"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-pink-200"><i class="fa-solid fa-meteor mr-1"></i> Collecting Meteorite Shards & Stardust Crystals</span>
+                                        <span class="text-pink-400">88%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-pink-400 to-yellow-300 h-2 rounded-full w-[88%] shadow-sm shadow-pink-400"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-cyan-200"><i class="fa-solid fa-star mr-1"></i> Philosophical Journaling</span>
+                                        <span class="text-cyan-400">73%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full w-[73%] shadow-sm shadow-cyan-400"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-purple-200"><i class="fa-solid fa-moon mr-1"></i> Watching Planetary Life from Afar</span>
+                                        <span class="text-purple-400">35%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-purple-400 to-pink-500 h-2 rounded-full w-[35%] shadow-sm shadow-purple-400"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-pink-200"><i class="fa-solid fa-cookie-bite mr-1"></i> Attending Loud, Crowded Festivals</span>
+                                        <span class="text-pink-400">3%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-pink-400 to-yellow-300 h-2 rounded-full w-[3%] shadow-sm shadow-pink-400"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hobbies Tags -->
+                            <div class="pt-2">
+                                <h4 class="font-space text-sm font-semibold text-purple-300 mb-3">What if He Joined Extracurricular:</h4>
+                                <div class="flex flex-wrap gap-2 font-mono text-xs">
+                                    <span class="px-3 py-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-cyan-200">Astronomy & Celestial Studies Club</span>
+                                    <span class="px-3 py-1.5 rounded-lg bg-purple-950/60 border border-purple-500/30 text-purple-200">Flight & Aerial Racing Club</span>
+                                    <span class="px-3 py-1.5 rounded-lg bg-pink-950/60 border border-pink-500/30 text-pink-200">Creative Writing & Philosophy Circle</span>
+                                    <span class="px-3 py-1.5 rounded-lg bg-yellow-950/60 border border-yellow-500/30 text-yellow-200">Landscape Photography Club</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9:16 Image Frame -->
+                        <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-4">
+                            <div class="flex items-center gap-3 text-pink-300 font-space font-bold text-xl">
+                                <i class="fa-solid fa-image text-cyan-400"></i> Celestial Portrait
+                            </div>
+                            <div class="w-full max-w-sm mx-auto aspect-[16/9] rounded-xl overflow-hidden border border-purple-400/30 bg-slate-950/60">
+                                <img src="image/star.jpg" alt="Stardust Cookie celestial portrait" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <!-- Personality Traits -->
+                        <div class="glass-panel glass-panel-hover rounded-2xl p-6 space-y-4">
+                            <div class="flex items-center gap-3 text-yellow-200 font-space font-bold text-xl">
+                                <i class="fa-solid fa-brain-circuit text-yellow-300"></i> Personality Spectrum
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                                <div class="p-3 rounded-xl bg-purple-900/20 border border-purple-500/20">
+                                    <div class="text-purple-300 font-bold mb-1">Unknown Grief & Sorrow</div>
+                                    <p class="text-slate-400">Because of his history as an unwanted failure in the Wizards' eyes, an unknown grief and sorrow consumed Stardust Cookie for much of his time as he traveled the stars.</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-cyan-900/20 border border-cyan-500/20">
+                                    <div class="text-cyan-300 font-bold mb-1">Eternity Willing</div>
+                                    <p class="text-slate-400">Only after coming to terms with his creation did he give up his fury, choosing instead to find further meaning by traveling across space. Now, he is a wistful, philosophical, and low-key soul who only wishes to comprehend the depth of the world around him.</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-pink-900/20 border border-pink-500/20">
+                                    <div class="text-pink-300 font-bold mb-1">Cosmos Understandable</div>
+                                    <p class="text-slate-400">Stardust Cookie primarily understands the cosmos, seeing stars as kindred souls that always keep him company. He does not understand Earthbread-bound concepts such as interpersonal relationships or even food, and has thus only cautiously begun to explore these things for himself.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: LORE & BACKGROUND -->
+            <section id="page-background" class="page-view space-y-8">
+                <div class="border-b border-purple-500/20 pb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-400/30 text-xs font-mono text-pink-300 mb-2">
+                        <i class="fa-solid fa-timeline"></i> CELESTIAL TIMELINE
+                    </div>
+                    <h2 class="font-space text-3xl font-extrabold text-gradient-celestial">CHRONICLES & BACKGROUND LORE</h2>
+                </div>
+
+                <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-8">
+                    <!-- Timeline Items -->
+                    <div class="relative border-l-2 border-purple-500/30 ml-4 md:ml-8 space-y-10">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative pl-6 md:pl-8 group">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-950 group-hover:scale-125 transition-transform"></div>
+                            <span class="font-mono text-xs text-cyan-300 bg-cyan-950/80 px-2.5 py-1 rounded border border-cyan-500/30">Main Story / Origin</span>
+                            <h3 class="font-space font-bold text-xl text-slate-100 mt-2">Eternal City of Wizards</h3>
+                            <div class="lore-image-frame">
+                                <img src="image/Eternal_city_of_wizards_cutscene_moonlight_stardust_holding_hands.webp" alt="Moonlight Cookie and Stardust Cookie in the Eternal City of Wizards">
+                            </div>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                In an attempt to create the Perfect Cookie, the Wizards chose only the dough imbued with the purest moonlight, discarding impure dough into space. This discarded dough eventually gathered in the starlight until it reached the Sugar Swan Constellation, where it had gained a Cookie's consciousness. As time passed by, stardust completed its form, and the sun heated the dough, baking Stardust Cookie. Although he first thought that his birth was nothing more than a coincidence, the stars told him that the origin of his dough could be traced back to the City of Wizards, where he felt a calling to return to.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative pl-6 md:pl-8 group">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-400 border-4 border-slate-950 group-hover:scale-125 transition-transform"></div>
+                            <span class="font-mono text-xs text-purple-300 bg-purple-950/80 px-2.5 py-1 rounded border border-purple-500/30">Side Story I</span>
+                            <h3 class="font-space font-bold text-xl text-slate-100 mt-2">Crunchy Dreams</h3>
+                            <div class="lore-image-frame">
+                                <img src="image/Cutscene_dream_039.webp" alt="Stardust Cookie in a dreamy scene">
+                            </div>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                In the World of Dreams, Stardust Cookie asked Moonlight Cookie about how Cookies traveled through dreams. Moonlight Cookie then asked her brother why he was curious, to which Stardust Cookie admitted that he once had a dream about either a star or a Cookie wandering the Universe, remembering for certain only a sense of longing that caused his chest to ache whenever he thought about it. Realizing that the feeling had only strengthened ever since his arrival at the City of Wizards, he then asked Moonlight Cookie if it was possible to find this dream within her realm. Moonlight Cookie then falls asleep to locate the dream, causing Stardust Cookie to fall asleep as well.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative pl-6 md:pl-8 group">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-400 border-4 border-slate-950 group-hover:scale-125 transition-transform"></div>
+                            <span class="font-mono text-xs text-pink-300 bg-pink-950/80 px-2.5 py-1 rounded border border-pink-500/30">Side Story II</span>
+                            <h3 class="font-space font-bold text-xl text-slate-100 mt-2">Stardust Cookie's Space Travels</h3>
+                            <div class="lore-image-frame">
+                                <img src="image/Cutscene_galaxy_01.webp" alt="Stardust Cookie traveling through space">
+                            </div>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                Stardust Cookie comes aboard Milky Way Cookie's train to go on a journey, learning how to interact with others and open Starflour Crisp packets. He finds himself having to sit next to a peculiar creature known as the Space Doughnut. Although he initially finds himself frustrated with his inability to understand the creature and its mannerisms, its friendly behavior eventually sways him over.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: CONTACT / TRANSMISSION -->
+            <section id="page-contact" class="page-view space-y-8">
+                <div class="border-b border-purple-500/20 pb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-400/30 text-xs font-mono text-yellow-300 mb-2">
+                        <i class="fa-solid fa-tower-cell"></i> FIELD FREQUENCY
+                    </div>
+                    <h2 class="font-space text-3xl font-extrabold text-gradient-celestial">TRANSMISSION CHANNEL</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Contact Form Card -->
+                    <div class="glass-panel rounded-3xl p-6 md:p-8 space-y-6">
+                        <h3 class="font-space text-xl font-bold text-cyan-300 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Send Stardust Cookie Message
+                        </h3>
+
+                        <div class="transmission-intro">
+                            <img src="image/mi amor.png" alt="Stardust Cookie" class="transmission-image">
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Send your message across the stars and let Stardust Cookie receive your signal from the Eternal City of Wizards. He want your cosmic thoughts, questions, or greetings! Fill out the form below and your transmission will be sent into the vastness of space.
+                            </p>
+                        </div>
+
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block font-mono text-xs text-purple-200 mb-1">TRANSMITTER NAME</label>
+                                <input type="text" placeholder="e.g. Your Name" required 
+                                    class="w-full bg-slate-950/70 border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block font-mono text-xs text-purple-200 mb-1">MAGNETIC FIELD FREQUENCY (EMAIL)</label>
+                                <input type="email" placeholder="you@starlight.io" required 
+                                    class="w-full bg-slate-950/70 border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block font-mono text-xs text-purple-200 mb-1">TRANSMISSION BODY</label>
+                                <textarea rows="4" placeholder="Type your cosmic message or query here..." required
+                                    class="w-full bg-slate-950/70 border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 text-slate-950 font-space font-bold hover:opacity-90 transition-all shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-satellite-dish"></i> Emit Signal
+                            </button>
+                        </form>
+
+                        <div id="form-feedback" class="hidden p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-mono text-center">
+                            <i class="fa-solid fa-circle-check mr-1"></i> Signal broadcasted successfully into deep space!
+                        </div>
+                    </div>
+
+                    <!-- Orbital Coordinates & Social Links -->
+                    <div class="space-y-6">
+                        <div class="glass-panel rounded-3xl p-6 md:p-8 space-y-5">
+                            <h3 class="font-space text-xl font-bold text-pink-300 flex items-center gap-2">
+                                <i class="fa-solid fa-location-crosshairs"></i> Galaxy Coordinates
+                            </h3>
+                            
+                            <ul class="space-y-4 font-mono text-xs">
+                                <li class="flex items-center gap-3 p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+                                    <i class="fa-solid fa-globe text-cyan-300 text-lg"></i>
+                                    <div>
+                                        <div class="text-slate-400">CURRENT REALM</div>
+                                        <div class="text-slate-100 font-semibold">Eternal City of Wizard</div>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-center gap-3 p-3 rounded-xl bg-purple-950/30 border border-purple-500/20">
+                                    <i class="fa-solid fa-terminal text-purple-300 text-lg"></i>
+                                    <div>
+                                        <div class="text-slate-400">COMMUNICATION PROTOCOL</div>
+                                        <div class="text-slate-100 font-semibold">Earthbread</div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="pt-4 border-t border-purple-500/20">
+                                <h4 class="font-space text-sm font-semibold text-yellow-200 mb-3">Galactic Social Nodes:</h4>
+                                <div class="flex gap-3">
+                                    <a href="https://tiktok.com/@onetone.scale" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-400/30 flex items-center justify-center text-cyan-300 hover:border-cyan-400 hover:scale-110 transition-all">
+                                        <i class="fa-brands fa-tiktok text-lg"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/v4r1ously?stkn=MXc3YWp4OW40czN3" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-400/30 flex items-center justify-center text-purple-300 hover:border-purple-400 hover:scale-110 transition-all">
+                                        <i class="fa-brands fa-instagram text-lg"></i>
+                                    </a>
+                                    <a href="https://x.com/variouslydoarts" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-400/30 flex items-center justify-center text-pink-300 hover:border-pink-400 hover:scale-110 transition-all">
+                                        <i class="fa-brands fa-x text-lg"></i>
+                                    </a>
+                                    <a href="https://whatsapp.com/channel/0029Vb5zkcdGOj9lRBfbgT3B" class="w-10 h-10 rounded-xl bg-slate-900 border border-purple-400/30 flex items-center justify-center text-yellow-300 hover:border-yellow-400 hover:scale-110 transition-all">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER WIREFRAME -->
+        <footer class="glass-panel border-t border-purple-500/20 py-6 px-4 text-center font-mono text-xs text-purple-300/70">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    © 2026 STARDUST COOKIE // ASTROLOGICAL CODE MATRIX
+                </div>
+                <div class="flex items-center gap-4 text-slate-400">
+                    <span class="hover:text-cyan-300 cursor-pointer" onclick="switchPage('overview')">Overview</span> • 
+                    <span class="hover:text-purple-300 cursor-pointer" onclick="switchPage('character')">Character</span> • 
+                    <span class="hover:text-pink-300 cursor-pointer" onclick="switchPage('background')">Lore</span> • 
+                    <span class="hover:text-yellow-200 cursor-pointer" onclick="switchPage('contact')">Contact</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JAVASCRIPT: Navigation & Celestial Starfield Particle Animation -->
+    <script>
+        // --- Multi-Page Router System ---
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => p.classList.remove('active-view'));
+
+            // Remove active style from all nav buttons
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Show targeted page
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) {
+                activePage.classList.add('active-view');
+            }
+
+            // Highlight target nav button
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+
+            // Smooth scroll to top of main container
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle logic
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Form Submission Simulation (Safe notification)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 5000);
+        }
+
+        // --- Interactive Celestial Background Canvas (Stars & Twinkle) ---
+        window.onload = function() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+
+            let stars = [];
+            const numStars = 150;
+            const colors = ['#93c5fd', '#c084fc', '#f472b6', '#67e8f9', '#fef08a', '#ffffff'];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < numStars; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.8 + 0.3,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        alpha: Math.random(),
+                        speed: Math.random() * 0.015 + 0.005,
+                        direction: Math.random() > 0.5 ? 1 : -1
+                    });
+                }
+            }
+
+            function animateStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                stars.forEach(star => {
+                    // Update star twinkling opacity
+                    star.alpha += star.speed * star.direction;
+                    if (star.alpha >= 1 || star.alpha <= 0.1) {
+                        star.direction *= -1;
+                    }
+
+                    // Render star
+                    ctx.save();
+                    ctx.globalAlpha = star.alpha;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = star.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = star.color;
+                    ctx.fill();
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(animateStars);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initStars();
+            });
+
+            resizeCanvas();
+            initStars();
+            animateStars();
+        };
+    </script>
+</body>
+</html>
